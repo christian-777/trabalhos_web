@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="../../../jquery-3.5.1.min.js"></script>
+        <script src="jquery-3.5.1.min.js"></script>
 
             <script>
                 $(document).ready(function(){
-                    $("#genero").change(function(){
+                  
                         //PHP pra buscar
+                        
                         $.post("seleciona_genero.php", function(g){
                             option="<option label='Gênero da Banda' />";
                             $.each(g, function(indice, valor){
@@ -16,19 +17,21 @@
                             });
                             $("#genero").html(option);
                         });
-                    });
+                    
 
-                    $("#banda").change(function(){
-                        //PHP pra buscar
-                        
-                        $.post("seleciona_banda.php", function(b){
+                        $("#genero").change(function(){
+                            var id =$("#genero").val();
+                        console.log(id);
+                        $.post("seleciona_banda.php", {"id":id}, function(b){
                             option="<option label='Nome da Banda' />";
                             $.each(b, function(indice, valor){
                                 option+="<option value='"+valor.id_banda+"'> "+valor.nome+" </option>";
                             });
                             $("#banda").html(option);
                         });
-                    });
+                        });
+                        
+                  
                 });
             </script>
         <title>Cadastro musica</title>
@@ -39,7 +42,7 @@
             if(empty($_POST))
             {
                 echo'<form action="form_musica.php" method="post">
-                <input type="text" name="nome_musica" placeholder="Nome da música…. ">
+                <input type="text" id="nome_musica" name="nome_musica" placeholder="Nome da música…. ">
                 <br />
                 <select name="genero" id="genero">
                         <option label="Gênero da Banda" />

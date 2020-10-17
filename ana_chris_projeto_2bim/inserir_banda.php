@@ -3,7 +3,6 @@
     $genero = $_POST["genero"];
     $banda = $_POST["banda"];
     $insert = "INSERT INTO banda(
-                                    id_banda,
                                     nome, 
                                     cod_genero
                                 ) VALUES (

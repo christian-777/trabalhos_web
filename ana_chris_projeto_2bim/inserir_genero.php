@@ -3,10 +3,9 @@
     $genero = $_POST["genero"];
     
     $insert = "INSERT INTO genero(
-                                    id_genero,
                                     nome 
                                 ) VALUES (
-                                    '$genero',
+                                    '$genero'
                                 )";
     mysqli_query($con, $insert)
      or die(mysqli_error($con));

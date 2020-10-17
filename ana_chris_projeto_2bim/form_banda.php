@@ -9,7 +9,7 @@
 
         <script>
             $(document).ready(function(){
-                $("#banda").change(function(){
+                $("#banda").keyup(function(){
                     //PHP pra buscar
                     $.post("seleciona_genero.php", function(g){
                         option="<option label='Gênero da Banda' />";
@@ -30,7 +30,7 @@
         if(empty($_POST))
         {
             echo'<form action="form_banda.php" method="post">
-            <input type="text" name="banda" placeholder="Nome da banda...">
+            <input type="text" id="banda" name="banda" placeholder="Nome da banda...">
                 <select name="genero" id="genero">
                     <option label="Gênero da Banda" />
                 </select>
