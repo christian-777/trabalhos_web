@@ -16,10 +16,10 @@
                                 checkbox+="<input type='checkbox' value='"+valor.id_musica+"' name='musicas'> "+valor.nome.musica+"("+valor.nome.banda+")";
                             });
                             $("#receptora").html(checkbox);
+                            escolhas = document.GetElementsByName("musicas").value;
+                            $("#escolhas").val(escolhas);
                         });
-                    
-
-                        //select id_musica.musica, nome.musica , nome. banda from musica inner join banda where cod_banda.musica = id_banda.banda 
+                        
                 });
             </script>
         <title>Cadastro playlist</title>
@@ -38,6 +38,7 @@
             }
             else
             {
+                echo'<input type="hidden" id="escolhas" name="escolhas" value="">';
                 include "inserir_musica.php";
             }
         ?>
