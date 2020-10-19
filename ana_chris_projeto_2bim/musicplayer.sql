@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 17-Out-2020 às 19:03
+-- Data de Criação: 19-Out-2020 às 19:11
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -29,12 +29,14 @@ USE `musicplayer`;
 --
 
 CREATE TABLE IF NOT EXISTS `banda` (
-  `id_banda` int(11) NOT NULL,
+  `id_banda` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `cod_genero` int(11) NOT NULL,
   PRIMARY KEY (`id_banda`),
-  KEY `cod_genero` (`cod_genero`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `cod_genero_2` (`cod_genero`),
+  KEY `cod_genero` (`cod_genero`),
+  KEY `cod_genero_3` (`cod_genero`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -43,10 +45,10 @@ CREATE TABLE IF NOT EXISTS `banda` (
 --
 
 CREATE TABLE IF NOT EXISTS `genero` (
-  `id_genero` int(11) NOT NULL,
+  `id_genero` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id_genero`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -55,13 +57,13 @@ CREATE TABLE IF NOT EXISTS `genero` (
 --
 
 CREATE TABLE IF NOT EXISTS `musica` (
-  `id_musica` int(11) NOT NULL,
+  `id_musica` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   `cod_banda` int(11) NOT NULL,
   `youtube` text NOT NULL,
   PRIMARY KEY (`id_musica`),
-  UNIQUE KEY `cod_banda` (`cod_banda`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `cod_banda` (`cod_banda`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -70,13 +72,14 @@ CREATE TABLE IF NOT EXISTS `musica` (
 --
 
 CREATE TABLE IF NOT EXISTS `musica_playlist` (
-  `id_musica_playlist` int(11) NOT NULL,
+  `id_musica_playlist` int(11) NOT NULL AUTO_INCREMENT,
   `cod_musica` int(11) NOT NULL,
   `cod_playlist` int(11) NOT NULL,
   PRIMARY KEY (`id_musica_playlist`),
-  UNIQUE KEY `cod_musica` (`cod_musica`),
-  UNIQUE KEY `cod_playlist` (`cod_playlist`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `cod_musica` (`cod_musica`),
+  KEY `cod_playlist` (`cod_playlist`),
+  KEY `cod_playlist_2` (`cod_playlist`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -85,10 +88,10 @@ CREATE TABLE IF NOT EXISTS `musica_playlist` (
 --
 
 CREATE TABLE IF NOT EXISTS `playlist` (
-  `id_playlist` int(11) NOT NULL,
-  `nome` int(100) NOT NULL,
+  `id_playlist` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id_playlist`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
@@ -110,13 +113,8 @@ ALTER TABLE `musica`
 -- Limitadores para a tabela `musica_playlist`
 --
 ALTER TABLE `musica_playlist`
-  ADD CONSTRAINT `musica_playlist_ibfk_1` FOREIGN KEY (`cod_musica`) REFERENCES `musica` (`id_musica`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `playlist`
---
-ALTER TABLE `playlist`
-  ADD CONSTRAINT `playlist_ibfk_1` FOREIGN KEY (`id_playlist`) REFERENCES `musica_playlist` (`cod_playlist`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `musica_playlist_ibfk_1` FOREIGN KEY (`cod_musica`) REFERENCES `musica` (`id_musica`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `musica_playlist_ibfk_2` FOREIGN KEY (`cod_playlist`) REFERENCES `playlist` (`id_playlist`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
