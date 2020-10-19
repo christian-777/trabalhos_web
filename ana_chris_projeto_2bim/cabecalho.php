@@ -2,7 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>input, textarea, select{margin:15px; width:300px;}</style>
+        <style>input, textarea, select{margin:15px; width:300px;}
+        .check{
+            width:50px;
+        }
+        </style>
     </head>
     <body>
         <b>Home |</b>

@@ -1,34 +1,21 @@
 <?php 
    
     include "conexao.php";
-    $nome_playlist = $_POST["nome_playlist"];
-    $escolhas = $_POST["escolhas"];
-
-    $insert = "INSERT INTO playlist(
-                                        nome
+    $nome_playlist = $_POST["nome_musica"];
+    $banda = $_POST["banda"];
+    $youtube = $_POST["youtube"];
+   
+        $insert = "INSERT INTO musica(
+                                       nome,
+                                       cod_banda,
+                                       youtube
                                     ) VALUES (
                                         '$nome_playlist',
-                                    )";
-mysqli_query($con, $insert)
-or die(mysqli_error($con));
-    $r ="SELECT * FROM playlist";
-    $cont=0;
-    while($linha=mysqli_fetch_assoc($r))
-    {
-        $cont++;
-    }
-    for($i=0; $i<=sizeof($escolhas); $i++)
-    {
-        $insert = "INSERT INTO musica_playlist(
-                                       cod_musica,
-                                       cod_playlist
-                                    ) VALUES (
-                                        '$escolhas[$i]',
-                                        '$cont'
+                                        '$banda',
+                                        '$youtube'
                                     )";
         mysqli_query($con, $insert)
         or die(mysqli_error($con));
-    }
     echo "musica inserida com sucesso";
     echo'<hr /> <a href="form_musica.php">Clique para cadastrar outra musica</a>';
 ?>
