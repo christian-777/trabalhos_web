@@ -25,6 +25,11 @@ or die(mysqli_error($con));
         mysqli_query($con, $insert)
         or die(mysqli_error($con));
     }
-    echo "musica inserida com sucesso";
-    echo'<hr /> <a href="form_musica.php">Clique para cadastrar outra musica</a>';
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Playlist inserida com sucesso!</strong>
+    <a href="form_playlist.php"> Clique para cadastrar outra playlist</a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>';
 ?>

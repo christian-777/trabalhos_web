@@ -2,25 +2,55 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>input, textarea, select{margin:15px; width:300px;}
-        .check{
-            width:50px;
-        }
-        </style>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
-        <b>Home |</b>
-        <b>Cadastrar: </b>
-        <a href="form_genero.php">GÊNERO</a> |
-        <a href="form_banda.php">BANDA</a> |
-        <a href="form_musica.php">MÚSICA</a> |
-        <a href="form_playlist.php">PLAYLIST</a>
-        <hr />
-        <b> Listar: </b>
-        <a href="listar_genero.php">GÊNERO</a> |
-        <a href="listar_banda.php">BANDA</a> |
-        <a href="listar_musica.php">MÚSICA</a> |
-        <a href="listar_playlist.php">PLAYLIST</a>
-        <hr /> <hr />
+        
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <p class="navbar-brand"> Cadastrar </p>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="form_genero.php">Gênero <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="form_banda.php">Banda </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="form_musica.php">Música </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="form_playlist.php">Playlist </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <p class="navbar-brand"> Listar </p>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="listar_genero.php">Gênero <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="listar_banda.php">Banda </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="listar_musica.php">Música </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="listar_playlist.php">Playlist </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
     </body>
 </html>

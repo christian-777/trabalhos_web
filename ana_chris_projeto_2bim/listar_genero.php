@@ -1,57 +1,55 @@
 <?php
-    function select(){
         include "conexao.php";
         include "cabecalho.php";
-        $select = "SELECT nome_genero FROM genero ORDER BY nome_genero";
-        $res = mysqli_query($con, $select);
-        while($linha = mysqli_fetch_assoc($res)){
-            echo "<option value=".$linha["nome_genero"].">".$linha["nome_genero"]."</option>";
-        };
-    }
 
-    function table(){
+    function a(){
         include "conexao.php";
         
-        $select = "SELECT genero.nome_genero FROM genero ";
+        $select = "SELECT genero FROM genero ";
 
         if($_POST){
             $select .= "WHERE (1=1) ";
-            if($_POST["nome_genero"]!=""){
-                $nome = $_POST["nome_genero"];
-                $select .= "AND genero.nome_genero like '%$nome%' ";
+            if($_POST["genero"]!=""){
+                $nome = $_POST["genero"];
+                $select .= "AND genero like '%$nome%' ";
             }
-        }
-
-        $select .= "ORDER BY nome_genero";
-
-        $res=mysqli_query($con, $select) or die($select);
-        while($linha=mysqli_fetch_assoc($res)){
-            echo "<tr>";
-            echo"<td>".$linha["nome_genero"]."</td>";
-            echo "</tr>";
         }
     }
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.5.1.min.js"></script>
+        <script>
+                $(document).ready(function(){
+
+                        $.post("seleciona_genero.php", function(g){
+                            console.log(g);
+                            var ul="";
+                            $.each(g, function(indice, valor){
+                                ul +="<ul><li> "+valor.genero+"</li></ul><br />";
+                            });
+                            $("#receptora").html(ul);
+                          
+                        });
+                        
+                });
+        </script>
     </head>
     <body>
-        <table border="1px">
-
         <div>   
-            <form action="genero.php" method="post">
+            <form action="listar_genero.php" method="post">
             Filtrar por:<br />
             <br /><br />
-            <input type="text" name="nome_genero" placeholder="Nome gênero…."> 
+            <input type="text" name="genero" placeholder="Filtrar visualização de gêneros..."> 
             <button>Filtrar</button><br /> <hr />
         </div>
             <?php
                 echo "<ul>
-                    <li>'.$nome_genero.'</li>
+                    <li>".$genero."</li>
                 </ul>";
             ?>
-        </table>
     </body>
 </html>
