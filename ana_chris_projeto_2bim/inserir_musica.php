@@ -11,7 +11,7 @@
 <?php 
    
     include "conexao.php";
-    $nome_playlist = $_POST["nome_musica"];
+    $nome_playlist = $_POST["musica"];
     $banda = $_POST["banda"];
     $youtube = $_POST["youtube"];
    
