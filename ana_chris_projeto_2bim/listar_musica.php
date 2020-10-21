@@ -1,51 +1,38 @@
-<?php
-    function table(){
-        include "conexao.php";
-        include "cabecalho.php";
-        $select="SELECT * FROM familia ";
 
-        if($_POST){
-            if($_POST["nome"]!=""){
-                $nome = $_POST["nome"];
-                $select .= "WHERE nome like '%$nome%' OR nome_cientifico like '%$nome%' ";
-            }
-        }
 
-        $select .= "ORDER BY nome";
-
-        $res=mysqli_query($con, $select);
-        while($linha=mysqli_fetch_assoc($res)){
-            echo "<tr>";
-            echo"<td>".$linha["nome"]."</td>";
-            echo"<td>".$linha["nome_cientifico"]."</td>";
-            echo "</tr>";
-        }
-    }
-?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="utf-8">
+        <script src="jquery-3.5.1.min.js"></script>
+        <title>lista musica</title>
+
+        <script>
+            $(document).ready(function(){
+                    $.post("seleciona_musica.php", function(g){
+                        var tabela="";      
+                        $.each(g, function(indice, valor){
+                            tabela +="<tr><td>"+valor.nome_musica+"</td><td>"+valor.nome_banda+"</td></tr>";
+                        });
+                        $("#tabela").html(tabela);
+                    });
+            });
+        </script>
+
     </head>
     <body>
-        <div>   
-            <form action="familia.php" method="post">
-            Filtrar por:<br />
-            <input type="text" name="nome" placeholder="Nome ou nome científico…."> 
-            <button>Pesquisar</button><br /> <hr />
-        </div>
-        
-
-        
+        <?php
+            include "cabecalho.php";
+        ?>
         <table border="1px">
-            <tr >
-                <th colspan="2">Familia</th>
+            <tr>
+                <th colspan="2">musicas</th>
             </tr>
             <tr>
-                <td>Nome</td>
-                <td>Nome Científico</td>
+                <th>nome da musica</th>
+                <th>nome da banda</th>
             </tr>
-            <?php table(); ?>
+            <tr id="tabela"></tr>
         </table>
     </body>
 </html>

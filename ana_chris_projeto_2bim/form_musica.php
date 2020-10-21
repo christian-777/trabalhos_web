@@ -23,7 +23,6 @@
 
                         $("#genero").change(function(){
                             var id =$("#genero").val();
-                        console.log(id);
                         $.post("seleciona_banda.php", {"id":id}, function(b){
                             option="<option label='Nome da Banda' />";
                             $.each(b, function(indice, valor){

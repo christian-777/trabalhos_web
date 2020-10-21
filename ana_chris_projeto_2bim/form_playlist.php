@@ -14,7 +14,7 @@
                             console.log(g);
                             var checkbox="";
                             $.each(g, function(indice, valor){
-                                checkbox +="<input class='check' type='checkbox' value='"+valor.id_da_musica+"' name='musicas'> "+valor.nome_musica+"<strong> - "+valor.nome_banda+"</strong><br />";
+                                checkbox +="<input class='check' type='checkbox' value='"+valor.id_da_musica+"' name='musicas[]'> "+valor.nome_musica+"<strong> - "+valor.nome_banda+"</strong><br />";
                             });
                             $("#receptora").html(checkbox);
                           
