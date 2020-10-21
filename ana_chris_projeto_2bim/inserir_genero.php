@@ -27,6 +27,6 @@
     </button>
   </div>';
 ?>
-<script src="../js/bootstrap.min.js"></script>
+<script src="bootstrap.min.js"></script>
 </body>
 </html>

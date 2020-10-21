@@ -21,7 +21,7 @@ body{
 }
 
 
-.tabela {
+.table {
 	margin-top: 50vh;
 	padding: 40px 40px;
 	background-color: rgb(250,250,250);
@@ -37,6 +37,7 @@ body{
 	color: white;
 }
 
-.rodape{
-	font-size: 15px;
-}
+#linha {
+	width: 100%;
+	border-bottom: 1px solid white;
+  }

@@ -19,7 +19,9 @@
         <meta charset="utf-8">
         <script src="jquery-3.5.1.min.js"></script>
         <title>lista banda</title>
-
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index.css">
+	    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script>
             $(document).ready(function(){
                     var id=0;
@@ -52,15 +54,31 @@
         <?php
             include "cabecalho.php";
         ?>
-        <form method="post">
-        <select id="select">
-            <option label="Nome da playlist"/>
-        </select>
-        </form>
-        <div id="recebe">
+        <div class="login-form col-xs-1 offset-xs-1
+            col-sm-3 offset-sm-5 col-md-3 offset-md-5">
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                <header>
+                    <h1 class="text-center" class="img-fluid"></h1>
+                    <h2 class="text-center"><b>Playlists</b></h2>
+                </header>
+                <form method="post">
+                    <div class="form-group">
+				        <div class="input-group" >
+                            <select class="custom-select mr-sm-2" id="select" class="text-center">
+                                <option selected>Nome da playlist...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr /><hr />      
+        <div id="recebe" class="text-center">
         <?php
             lista();
-        ?>
-        </div>
+        ?>      
+         </div>
+            </div>
+        </div>            
+        </form>
+        <script src="bootstrap.min.js"></script>
     </body>
 </html>
