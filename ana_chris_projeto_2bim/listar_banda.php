@@ -14,13 +14,11 @@
                     $.post("seleciona_banda.php", {"id":id}, function(g){
                         var lista="";      
                         $.each(g, function(indice, valor){
-                            lista +="<ul><li>"+valor.nome+ "-" +valor.id_banda+  "</li></ul>";
+                            lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
                         });
                         $("#lista").html(lista);
                     });
 
-                    $("#banda").keyup(function(){
-                    //PHP pra buscar
                     $.post("seleciona_genero.php", function(g){
                         option="<option label='Gênero da Banda' />";
                         $.each(g, function(indice, valor){
@@ -28,35 +26,92 @@
                         });
                         $("#genero").html(option);
                     });
-                });
+
+
+                    //FIM DA PRIMEIRA PARTE
+
+                    $("#genero").change(function(){
+                        var v =  $("#genero").val();
+                        id=0;
+                        console.log(v);
+                        $.post("seleciona_banda.php",{"id":id}, function(g){
+                                var lista="";      
+                                console.log(g);
+                                $.each(g, function(indice, valor){
+                                    if(v==valor.id_banda && v==valor.cod_genero)
+                                    {
+                                        lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
+                                    }
+                                });
+                                $("#lista").html(lista);
+                        });
+
+                        $("#banda").keyup(function(){
+                        var value= $("#banda").val();
+                        id=0;
+                            $.post("seleciona_banda.php",{"id":id},function(g){
+                                var lista="";      
+                                console.log(g);
+                                $.each(g, function(indice, valor){
+                                    var nome=valor.nome_banda;
+                                    var index=nome.indexOf(value);
+                                    console.log(index);
+                                    if(nome.indexOf(value) > -1 && (valor.id_banda==v) && (v==valor.cod_genero))
+                                    {
+                                        lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
+                                    }
+                                });
+                            $("#lista").html(lista);
+                            });
+                        });
+                    });
+
+
+                    //FIM DA SEGUNDA PARTE
+
+
+                    $("#banda").keyup(function(){
+                    var value= $("#banda").val();
+                    id=0;
+                    console.log(value);
+                        $.post("seleciona_banda.php",{"id":id},function(g){
+                            var lista="";      
+                            console.log(g);
+                            $.each(g, function(indice, valor){
+                                var nome=valor.nome_banda;
+                                var index=nome.indexOf(value);
+                                console.log(index);
+                                if((nome.indexOf(value)) > -1)
+                                {
+                                    lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
+                                }
+                            });
+                            $("#lista").html(lista);
+                        });
+
+                        $("#genero").change(function(){
+                            var v =$("#genero").val();
+                            id=0;
+                            $.post("seleciona_banda.php",{"id":id},function(g){
+                                var lista="";      
+                                console.log(g);
+                                $.each(g, function(indice, valor){
+                                    var nome=valor.nome_banda;
+                                    var index=nome.indexOf(value);
+                                    if(nome.indexOf(value)> -1 && (valor.id_banda==v) && (v==valor.cod_genero))
+                                    {
+                                        lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
+                                    }
+                                });
+                                $("#lista").html(lista);
+                            });
+                        });
+                    });
+                    
             });
         </script>
 
-        <?php
-            function lista(){
 
-            include "conexao.php";
-
-            $select = "SELECT genero.nome as nome_genero FROM genero";
-
-            if($_POST){
-                $select .= "WHERE (1=1) ";
-                if($_POST["nome"]!=""){
-                    $nome = $_POST["nome"];
-                    $select .= "AND genero.nome like '%$nome%' ";
-                }
-            }
-
-            $select .= "ORDER BY nome_genero";
-
-            $res=mysqli_query($con, $select) or die($select);
-            while($linha=mysqli_fetch_assoc($res)){
-                echo "<ul>";
-                echo"<li>".$linha["nome_genero"]."</li>";
-                echo "</ul>";
-            }
-        }
-        ?>
 
     </head>
     <body>
@@ -74,22 +129,20 @@
                 <form method="post">
                     <div class="form-group">
                         <div class="input-group" >
-                            <select class="custom-select mr-sm-2" id="banda" class="text-center">
+                            <select class="custom-select mr-sm-2" id="genero" class="text-center">
                                 <option selected>Gênero da Banda...</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
 				        <div class="input-group" >
-                            <input type="text" name="genero" placeholder="Filtrar visualizações de gêneros...">
+                            <input type="text" id="banda" name="banda" placeholder="Filtrar pela banda...">
                             <button type="submit" class="btn btn-primary">Filtrar</button>
                         </div>
                     </div>
                     <hr /><hr />      
         <div id="lista" class="text-center">
-        <?php
-            lista();
-        ?>      
+       
          </div>
             </div>
         </div>            

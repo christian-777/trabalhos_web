@@ -14,7 +14,7 @@
                     $.post("seleciona_musica.php", function(g){
                         var lista="";      
                         $.each(g, function(indice, valor){
-                            lista +="<ul><li>"+valor.nome_musica+"-" +valor.nome_banda+ "-" +valor.id_banda+"</li></ul>";
+                            lista +="<ul><li>"+valor.nome_musica+"-" +valor.nome_banda+ "-" +valor.nome_genero+"</li></ul>";
                         });
                         $("#lista").html(lista);
                     });

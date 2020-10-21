@@ -9,7 +9,7 @@
     }
     else
     {
-        $select="SELECT id_banda , nome FROM banda";
+        $select="SELECT banda.cod_genero as cod_genero, banda.id_banda as id_banda, banda.nome as nome_banda, genero.nome as nome_genero FROM banda inner join genero where banda.cod_genero=genero.id_genero";
     }
     $res = mysqli_query($con, $select) or die(mysqli_error($con));
     while($linha=mysqli_fetch_assoc($res)){

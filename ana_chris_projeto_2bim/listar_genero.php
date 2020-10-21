@@ -11,7 +11,23 @@
 
         <script>
             $(document).ready(function(){
+                $("#procura").keyup(function(){
+                    var value= $("#procura").val();
                     $.getJSON("seleciona_genero.php", function(g){
+                        var lista="";      
+                        $.each(g, function(indice, valor){
+                            var nome=valor.nome;
+                            var index=nome.indexOf(value);
+                            console.log(index);
+                            if(nome.indexOf(value) > -1)
+                            {
+                                lista +="<ul><li>"+valor.nome+"</li></ul>";
+                            }
+                        });
+                        $("#lista").html(lista);
+                    });
+                });
+                    $.getJSON("seleciona_genero.php",function(g){
                         var lista="";      
                         console.log(g);
                         $.each(g, function(indice, valor){
@@ -29,15 +45,7 @@
 
             $select = "SELECT genero.nome as nome_genero FROM genero";
 
-            if($_POST){
-                $select .= "WHERE (1=1) ";
-                if($_POST["nome"]!=""){
-                    $nome = $_POST["nome"];
-                    $select .= "AND genero.nome like '%$nome%' ";
-                }
-            }
-
-            $select .= "ORDER BY nome_genero";
+            $select .= " ORDER BY nome_genero";
 
             $res=mysqli_query($con, $select) or die($select);
             while($linha=mysqli_fetch_assoc($res)){
@@ -64,8 +72,7 @@
                 <form method="post">
                     <div class="form-group">
 				        <div class="input-group" >
-                            <input type="text" name="genero" placeholder="Nome do gênero...">
-                            <button type="submit" class="btn btn-primary">Filtrar Gênero</button>
+                            <input type="text" id="procura" name="genero" placeholder="Nome do gênero..."/>
                         </div>
                     </div>
                     <hr /><hr />      
