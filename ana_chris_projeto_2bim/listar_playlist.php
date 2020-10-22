@@ -54,8 +54,8 @@
         <?php
             include "cabecalho.php";
         ?>
-        <div class="login-form col-xs-1 offset-xs-1
-            col-sm-3 offset-sm-5 col-md-3 offset-md-5">
+        <center>
+        <div class="login-generico col-sm-2">
             <div class="form-row align-items-center">
                 <div class="col-auto my-1">
                 <header>

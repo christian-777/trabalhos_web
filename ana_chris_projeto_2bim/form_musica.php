@@ -22,8 +22,8 @@
                     
 
                         $("#genero").change(function(){
-                            var id =$("#genero").val();
-                        $.post("seleciona_banda.php", {"id":id}, function(b){
+                            var genero =$("#genero").val();
+                        $.post("seleciona_banda.php", {"genero":genero}, function(b){
                             option="<option label='Nome da Banda' />";
                             $.each(b, function(indice, valor){
                                 option+="<option value='"+valor.id_banda+"'> "+valor.nome+" </option>";

@@ -1,4 +1,9 @@
+<?php
+    include "conexao.php";
 
+    $selectGenero = "SELECT nome, id_genero FROM genero";
+    $resultadoGenero = mysqli_query($con,$selectGenero);
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,111 +13,6 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/index.css">
 	    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <script>
-            $(document).ready(function(){
-                    var id= 0;
-                    $.post("seleciona_banda.php", {"id":id}, function(g){
-                        var lista="";      
-                        $.each(g, function(indice, valor){
-                            lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
-                        });
-                        $("#lista").html(lista);
-                    });
-
-                    $.post("seleciona_genero.php", function(g){
-                        option="<option label='Gênero da Banda' />";
-                        $.each(g, function(indice, valor){
-                            option+="<option value='"+valor.id_genero+"'> "+valor.nome+" </option>";
-                        });
-                        $("#genero").html(option);
-                    });
-
-
-                    //FIM DA PRIMEIRA PARTE
-
-                    $("#genero").change(function(){
-                        var v =  $("#genero").val();
-                        id=0;
-                        console.log(v);
-                        $.post("seleciona_banda.php",{"id":id}, function(g){
-                                var lista="";      
-                                console.log(g);
-                                $.each(g, function(indice, valor){
-                                    if(v==valor.id_banda && v==valor.cod_genero)
-                                    {
-                                        lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
-                                    }
-                                });
-                                $("#lista").html(lista);
-                        });
-
-                        $("#banda").keyup(function(){
-                        var value= $("#banda").val();
-                        id=0;
-                            $.post("seleciona_banda.php",{"id":id},function(g){
-                                var lista="";      
-                                console.log(g);
-                                $.each(g, function(indice, valor){
-                                    var nome=valor.nome_banda;
-                                    var index=nome.indexOf(value);
-                                    console.log(index);
-                                    if(nome.indexOf(value) > -1 && (valor.id_banda==v) && (v==valor.cod_genero))
-                                    {
-                                        lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
-                                    }
-                                });
-                            $("#lista").html(lista);
-                            });
-                        });
-                    });
-
-
-                    //FIM DA SEGUNDA PARTE
-
-
-                    $("#banda").keyup(function(){
-                    var value= $("#banda").val();
-                    id=0;
-                    console.log(value);
-                        $.post("seleciona_banda.php",{"id":id},function(g){
-                            var lista="";      
-                            console.log(g);
-                            $.each(g, function(indice, valor){
-                                var nome=valor.nome_banda;
-                                var index=nome.indexOf(value);
-                                console.log(index);
-                                if((nome.indexOf(value)) > -1)
-                                {
-                                    lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
-                                }
-                            });
-                            $("#lista").html(lista);
-                        });
-
-                        $("#genero").change(function(){
-                            var v =$("#genero").val();
-                            id=0;
-                            $.post("seleciona_banda.php",{"id":id},function(g){
-                                var lista="";      
-                                console.log(g);
-                                $.each(g, function(indice, valor){
-                                    var nome=valor.nome_banda;
-                                    var index=nome.indexOf(value);
-                                    if(nome.indexOf(value)> -1 && (valor.id_banda==v) && (v==valor.cod_genero))
-                                    {
-                                        lista +="<ul><li>"+valor.nome_banda+ "-" +valor.nome_genero+  "</li></ul>";
-                                    }
-                                });
-                                $("#lista").html(lista);
-                            });
-                        });
-                    });
-                    
-            });
-        </script>
-
-
-
     </head>
     <body>
         <?php
@@ -129,24 +29,54 @@
                 <form method="post">
                     <div class="form-group">
                         <div class="input-group" >
-                            <select class="custom-select mr-sm-2" id="genero" class="text-center">
+                            <select class="custom-select mr-sm-2" name="genero" class="text-center">
                                 <option selected>Gênero da Banda...</option>
+                                <?php
+                                    while($linhaGenero = mysqli_fetch_assoc($resultadoGenero)){
+                                        echo '<option value='.$linhaGenero["nome"].'> '.$linhaGenero["nome"].'</option>';
+                                    }
+                                ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
 				        <div class="input-group" >
-                            <input type="text" id="banda" name="banda" placeholder="Filtrar pela banda...">
+                            <input type="text" name="banda" placeholder="Nome da Banda...">
                             <button type="submit" class="btn btn-primary">Filtrar</button>
                         </div>
                     </div>
                     <hr /><hr />      
-        <div id="lista" class="text-center">
-       
+        <div id="lista" class="text-center">     
          </div>
             </div>
         </div>            
         </form>
+
+        <?php
+
+            $select = "SELECT banda.nome as banda, genero.nome as genero FROM banda INNER JOIN genero ON banda.cod_genero = genero.id_genero";
+
+            if(!empty($_POST)){
+                $select .= " WHERE (1=1) ";
+                    
+                if($_POST["banda"]!=""){
+                    $nome = $_POST["banda"];
+                    $select .= " AND banda.nome like '%$nome%' ";
+                }
+
+                if($_POST["genero"]!=""){
+                    $genero = $_POST["genero"];
+                    $select .= " AND genero.nome like '%$genero%' ";
+                }
+            }
+
+            $res=mysqli_query($con, $select) or die($select);
+            while($linha=mysqli_fetch_assoc($res)){
+                echo "<ul>";
+                echo"<li>".$linha["banda"]. "-".$linha["genero"]."</li>";
+                echo "</ul>";
+            }
+        ?>
         <script src="bootstrap.min.js"></script>
     </body>
 </html>

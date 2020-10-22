@@ -8,54 +8,6 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/index.css">
 	    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-        <script>
-            $(document).ready(function(){
-                $("#procura").keyup(function(){
-                    var value= $("#procura").val();
-                    $.getJSON("seleciona_genero.php", function(g){
-                        var lista="";      
-                        $.each(g, function(indice, valor){
-                            var nome=valor.nome;
-                            var index=nome.indexOf(value);
-                            console.log(index);
-                            if(nome.indexOf(value) > -1)
-                            {
-                                lista +="<ul><li>"+valor.nome+"</li></ul>";
-                            }
-                        });
-                        $("#lista").html(lista);
-                    });
-                });
-                    $.getJSON("seleciona_genero.php",function(g){
-                        var lista="";      
-                        console.log(g);
-                        $.each(g, function(indice, valor){
-                            lista +="<ul><li>"+valor.nome+"</li></ul>";
-                        });
-                        $("#lista").html(lista);
-                    });
-            });
-        </script>
-        
-        <?php
-            function lista(){
-
-            include "conexao.php";
-
-            $select = "SELECT genero.nome as nome_genero FROM genero";
-
-            $select .= " ORDER BY nome_genero";
-
-            $res=mysqli_query($con, $select) or die($select);
-            while($linha=mysqli_fetch_assoc($res)){
-                echo "<ul>";
-                echo"<li>".$linha["nome_genero"]."</li>";
-                echo "</ul>";
-            }
-        }
-        ?>
-    
     </head>
     <body>
         <?php
@@ -72,18 +24,37 @@
                 <form method="post">
                     <div class="form-group">
 				        <div class="input-group" >
-                            <input type="text" id="procura" name="genero" placeholder="Nome do gênero..."/>
+                            <input type="text" name="genero" placeholder="Nome do gênero...">
+                            <button type="submit" class="btn btn-primary">Filtrar Gênero</button>
                         </div>
                     </div>
                     <hr /><hr />      
         <div id="lista" class="text-center">
-        <?php
-            lista();
-        ?>      
          </div>
             </div>
         </div>            
         </form>
+        <?php
+
+            include "conexao.php";
+
+            $select = "SELECT * FROM genero";
+
+            if(!empty($_POST)){
+                $select .= " WHERE (1=1) ";
+                if($_POST["genero"]!=""){
+                    $nome = $_POST["genero"];
+                    $select .= " AND nome like '%$nome%' OR nome like '%$nome%'";
+                }
+            }
+
+            $res=mysqli_query($con, $select) or die($select);
+            while($linha=mysqli_fetch_assoc($res)){
+                echo "<ul>";
+                echo"<li>".$linha["nome"]."</li>";
+                echo "</ul>";
+            }
+        ?>
         <script src="bootstrap.min.js"></script>
     </body>
 </html>

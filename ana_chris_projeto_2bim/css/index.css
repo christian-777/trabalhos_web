@@ -1,6 +1,16 @@
 body{
 	min-height: 100vh;
 	background-color: #CCC;
+	background-image: url('img/fundo.jpg');
+}
+
+.form-generico{
+	background-color: white;
+	color: black;
+	border-radius:10px;
+	margin-top: 50vh;
+	padding: 40px 40px;
+	transform: translateY(-50%);
 }
 
 .login-form {
@@ -28,6 +38,7 @@ body{
 	color: rgb(0, 0, 0);
 	transform: translateY(-3%);
 }
+
 
 .footer{
 	position: fixed;
