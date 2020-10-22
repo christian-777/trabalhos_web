@@ -38,12 +38,11 @@
             <form action="form_playlist.php" method="post">
             <div class="form-group">
 				<div class="input-group">
-                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-music-note-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
-                        <path fill-rule="evenodd" d="M12 3v10h-1V3h1z"/>
-                        <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1V2.82z"/>
-                        <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
+                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-music-note-beamed" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z"/>
+                    <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z"/>
+                    <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z"/>
+                </svg>
                     <input type="text" id="nome_playlist" name="nome_playlist" placeholder="Nome da playlist…. ">
                 </div>
             </div>
@@ -51,7 +50,7 @@
             </div>
             <footer>
                 <div class="float-left">
-                    <button type="submit" class="btn btn-primary">Cadastrar Playlist</button>
+                    <button type="button" class="btn btn-outline-light">Cadastrar Playlist</button>
                 </div>
             </footer>
             </form>

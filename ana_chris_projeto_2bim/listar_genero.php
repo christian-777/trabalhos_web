@@ -25,7 +25,7 @@
                     <div class="form-group">
 				        <div class="input-group" >
                             <input type="text" name="genero" placeholder="Nome do gênero...">
-                            <button type="submit" class="btn btn-primary">Filtrar Gênero</button>
+                            <button type="button" class="btn btn-outline-light">Filtrar Gênero</button>
                         </div>
                     </div>
                     <hr /><hr />      

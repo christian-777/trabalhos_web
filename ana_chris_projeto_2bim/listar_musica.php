@@ -70,7 +70,7 @@
                     <div class="form-group">
 				        <div class="input-group" >
                             <input type="text" name="musica" placeholder="Nome da música...">
-                            <button type="submit" class="btn btn-primary">Filtrar</button>
+                            <button type="button" class="btn btn-outline-light">Filtrar</button>
                         </div>
                     </div>
                     <hr /><hr />      
